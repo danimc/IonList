@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { TodoModel } from '../../shared/todo-model';
+import { AddTaskModalPage } from '../add-task-modal/add-task-modal';
+
 
 /**
  * Generated class for the TodosPage page.
@@ -18,7 +20,10 @@ export class TodosPage {
 
   private todos : TodoModel[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController ) {
   }
 
   ionViewDidLoad() {
@@ -45,6 +50,8 @@ export class TodosPage {
   }
 
   showAddTodo(){
-    console.log("hii");
+    let modal = this.modalCtrl.create(AddTaskModalPage);
+    modal.present();
+
   }
 }

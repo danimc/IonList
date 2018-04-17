@@ -6,13 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { TodosPage } from '../pages/todos/todos';
+import { AddTaskModalPage } from '../pages/add-task-modal/add-task-modal';
 
 
 @NgModule({
   declarations: [
     MyApp,
-    TodosPage
-    
+    TodosPage,
+    AddTaskModalPage
   ],
   imports: [
     BrowserModule,
@@ -21,7 +22,8 @@ import { TodosPage } from '../pages/todos/todos';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TodosPage
+    TodosPage,
+    AddTaskModalPage
     
   ],
   providers: [

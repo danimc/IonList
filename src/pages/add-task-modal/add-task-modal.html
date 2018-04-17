@@ -6,10 +6,16 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>add-task-modal</ion-title>
-  </ion-navbar>
-
+  <ion-toolbar color="primary">
+      <ion-title>Agregar nueva tarea</ion-title>
+      <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+          <span color="secondary" showWhen="ios">Cancela</span>
+          <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-toolbar>
+ 
 </ion-header>
 
 
