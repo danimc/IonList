@@ -40,4 +40,8 @@ export class TodosPage {
     return styles;
   }
 
+  toogleTodo(todo: TodoModel){
+    todo.isDone = ! todo.isDone;
+  }
+
 }
