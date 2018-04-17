@@ -44,4 +44,7 @@ export class TodosPage {
     todo.isDone = ! todo.isDone;
   }
 
+  showAddTodo(){
+    console.log("hii");
+  }
 }
