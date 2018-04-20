@@ -20,19 +20,23 @@
 
 
 <ion-content >
-  <ion-list no-lines>
+  <ion-list no-lines >
+    <form class="container" (ngSubmit)="submit()">
     <ion-item>
-      <ion-input placeholder="Descripcion de la tarea" clearInput
+      <ion-input placeholder="Descripcion de la tarea" name="description" clearInput
       [(ngModel)]="model.description"></ion-input>
     </ion-item>
 
+    
+
     <ion-item>
       <ion-label>Es Importante?</ion-label>
-      <ion-checkbox color="dark" [(ngModel)]="model.isImportant"></ion-checkbox>
+      <ion-checkbox name="isImportant" color="dark" [(ngModel)]="model.isImportant"></ion-checkbox>
     </ion-item>
 
-    <div>
-      <button ion-button block (click)="submit()"> Agregar </button>
+    <div class="submit-button">
+      <button ion-button block type="submit"> Agregar </button>
     </div>
+  </form>
   </ion-list>
 </ion-content>

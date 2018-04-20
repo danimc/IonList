@@ -30,7 +30,7 @@ export class AddTaskModalPage {
   }
 
   submit(){
-    console.log(this.model);
+    this.viewCtrl.dismiss(this.model)
   }
 
 }
