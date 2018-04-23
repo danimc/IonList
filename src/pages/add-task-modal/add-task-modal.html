@@ -23,11 +23,13 @@
   <ion-list no-lines >
     <form class="container" (ngSubmit)="submit()">
     <ion-item>
-      <ion-input placeholder="Descripcion de la tarea" name="description" clearInput
-      [(ngModel)]="model.description"></ion-input>
+      <ion-input placeholder="Descripcion de la tarea" required name="description" clearInput
+      [(ngModel)]="model.description" #descriptionState="ngModel"></ion-input>
     </ion-item>
 
-    
+    <ion-item color="danger" [hidden]="descriptionState.valid || descriptionState.untouched">
+      La descripcion es necesaria
+    </ion-item>
 
     <ion-item>
       <ion-label>Es Importante?</ion-label>
@@ -35,7 +37,7 @@
     </ion-item>
 
     <div class="submit-button">
-      <button ion-button block type="submit"> Agregar </button>
+      <button ion-button block type="submit" [disabled]="!descriptionState.valid"> Agregar </button>
     </div>
   </form>
   </ion-list>
