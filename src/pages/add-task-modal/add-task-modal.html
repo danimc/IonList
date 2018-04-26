@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-toolbar color="primary">
-      <ion-title>Agregar nueva tarea</ion-title>
+      <ion-title>{{title}}</ion-title>
       <ion-buttons start>
         <button ion-button (click)="dismiss()">
           <span color="secondary" showWhen="ios">Cancela</span>
@@ -37,7 +37,7 @@
     </ion-item>
 
     <div class="submit-button">
-      <button ion-button block type="submit" [disabled]="!descriptionState.valid"> Agregar </button>
+      <button ion-button block type="submit" [disabled]="!descriptionState.valid"> {{buttonText}} </button>
     </div>
   </form>
   </ion-list>

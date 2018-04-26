@@ -45,4 +45,13 @@ export class TodoServiceProvider {
     ];
   }
 
+  updateTodo(originalTodo: TodoModel, modifiedTodo: TodoModel) {
+    const index = this.todos.indexOf(originalTodo);
+    this.todos = [
+      ...this.todos.slice(0, index),
+      modifiedTodo,
+      ...this.todos.slice(index+1)
+    ];
+  }
+
 }

@@ -17,8 +17,15 @@ import { TodoModel } from '../../shared/todo-model';
 export class AddTaskModalPage {
 
   public model = new TodoModel('');
+  public title = "Nueva Tarea";
+  public buttonText = "Agregar";
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams) {
+    if(this.navParams.get('todo')) {
+      this.model = TodoModel.clone(this.navParams.get('todo'));
+      this.title = "Editar Tarea";
+      this.buttonText = "Guardar Cambios"
+    }
   }
 
   ionViewDidLoad() {
