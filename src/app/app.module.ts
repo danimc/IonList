@@ -11,6 +11,7 @@ import { TodosPage } from '../pages/todos/todos';
 import { AddTaskModalPage } from '../pages/add-task-modal/add-task-modal';
 import { TodoServiceProvider } from '../shared/todo-service';
 import { PrioritizedTodosPipe } from '../pipes/prioritized-todos/prioritized-todos'
+import { DoneTodosPipe } from '../pipes/done-todos/done-todos'
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PrioritizedTodosPipe } from '../pipes/prioritized-todos/prioritized-tod
     MyApp,
     TodosPage,
     AddTaskModalPage,
-    PrioritizedTodosPipe
+    PrioritizedTodosPipe,
+    DoneTodosPipe
   ],
   imports: [
     BrowserModule,

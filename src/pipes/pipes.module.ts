@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PrioritizedTodosPipe } from './prioritized-todos/prioritized-todos';
+import { DoneTodosPipe } from './done-todos/done-todos';
 @NgModule({
-	declarations: [PrioritizedTodosPipe],
+	declarations: [PrioritizedTodosPipe,
+    DoneTodosPipe],
 	imports: [],
-	exports: [PrioritizedTodosPipe]
+	exports: [PrioritizedTodosPipe,
+    DoneTodosPipe]
 })
 export class PipesModule {}
