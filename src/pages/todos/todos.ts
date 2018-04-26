@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { TodoModel } from '../../shared/todo-model';
 import { AddTaskModalPage } from '../add-task-modal/add-task-modal';
+import { TodoServiceProvider } from '../../shared/todo-service';
 
 
 /**
@@ -18,23 +19,17 @@ import { AddTaskModalPage } from '../add-task-modal/add-task-modal';
 })
 export class TodosPage {
 
-  private todos : TodoModel[];
+  
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public modalCtrl: ModalController ) {
+    public modalCtrl: ModalController,
+    public todoService: TodoServiceProvider) {
   }
 
   ionViewDidLoad() {
-    this.todos =  [
-      new TodoModel("primer elemento"),
-      new TodoModel("2 elemento"),
-      new TodoModel("3 elemento", true),
-      new TodoModel("4 elemento", false, true),
-
-    ];
-  }
+      }
 
   setTodoStyles(item: TodoModel){
 
@@ -45,12 +40,8 @@ export class TodosPage {
     return styles;
   }
 
-  toogleTodo(todo: TodoModel){
-    todo.isDone = ! todo.isDone;
-  }
-
-  addTodo(todo: TodoModel) {
-    this.todos.push(todo);
+  toogleTodo(todo: TodoModel) {
+    this.todoService.toogleTodo(todo);
   }
 
   showAddTodo(){
@@ -59,7 +50,7 @@ export class TodosPage {
 
     modal.onDidDismiss(data => {
       if (data){
-        this.addTodo(data);
+        this.todoService.addTodo(data);
       }
     })
 
