@@ -8,7 +8,6 @@ import { TodoModel } from '../../shared/todo-model';
  */
 @Pipe({
   name: 'prioritizedTodosPipe',
-  pure: false
 })
 export class PrioritizedTodosPipe implements PipeTransform {
   /**

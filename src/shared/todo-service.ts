@@ -32,14 +32,25 @@ export class TodoServiceProvider {
 
   toogleTodo(todo: TodoModel){
     setTimeout(() => {
+      let isDone = !todo.isDone;
+      const todoIndex = this.todos.indexOf(todo);
+      let updateTodo = new TodoModel(todo.description, todo.isImportant, isDone);
+
+      this.todos = [
+        ...this.todos.slice(0, todoIndex),
+        updateTodo,
+        ...this.todos.slice(todoIndex+1)
+      ];
       
     }, this.platform.is('ios') ? 0 : 300 );
-
-    todo.isDone = ! todo.isDone;
+    
   }
 
   addTodo(todo: TodoModel) {
-    this.todos.push(todo);
+    this.todos = [
+      ...this.todos,
+      todo
+      ];
   }
 
   removeTodo(todo: TodoModel) {
