@@ -15,6 +15,7 @@ export class DoneTodosPipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(todos: TodoModel[]) {
+    console.log("pipe doneTodo");
     return todos.filter(todo => todo.isDone);
   }
 }

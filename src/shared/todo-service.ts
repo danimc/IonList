@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 import { TodoModel } from './todo-model';
 
@@ -14,7 +15,7 @@ export class TodoServiceProvider {
 
   private todos : TodoModel[];
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private platform: Platform) {
     this.getTodos();
   }
 
@@ -30,6 +31,10 @@ export class TodoServiceProvider {
 
 
   toogleTodo(todo: TodoModel){
+    setTimeout(() => {
+      
+    }, this.platform.is('ios') ? 0 : 300 );
+
     todo.isDone = ! todo.isDone;
   }
 

@@ -1,3 +1,21 @@
 page-todos {
 
+    h3:first-child {
+        margin-top: 0.3em !important;
+    }
+
+    ion-list {
+        .item-block .item-inner {
+            border: none !important;
+        }
+
+        .item-divider {
+            border: none !important;
+            padding-top: 10px;
+            background-color: transparent;
+            color: color($colors, light);
+            font-style: italic;
+        }
+    }
+
 }
