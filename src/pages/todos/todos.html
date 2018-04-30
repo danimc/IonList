@@ -14,8 +14,11 @@
 
 
 <ion-content padding>
-  <h3>Mi lista</h3>
+  <h3>{{list.name}}</h3>
   <ion-list>
+
+    <ion-item class="no-todos" *ngIf="!todoService.todos || todoService.todos.length == 0">Agrega un nuevo elemento a la lista</ion-item>
+    
     <ion-item-sliding *ngFor="let todo of todoService.todos | prioritizedTodosPipe">
       <ion-item  [ngStyle]="setTodoStyles(todo)">
           <ion-label>{{todo.description}}</ion-label>

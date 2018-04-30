@@ -15,17 +15,22 @@ export class TodoServiceProvider {
   private todos : TodoModel[];
 
   constructor(public http: HttpClient) {
-    this.getTodos();
   }
 
-  getTodos() {
-    this.todos =  [
-      new TodoModel("primer elemento"),
-      new TodoModel("2 elemento"),
-      new TodoModel("3 elemento", true),
-      new TodoModel("4 elemento", false, true),
-
-    ];
+  public loadFromList(id: number) {
+    if(id < 3 ) {
+      this.todos =  [
+        new TodoModel("primer elemento"),
+        new TodoModel("2 elemento"),
+        new TodoModel("3 elemento", true),
+        new TodoModel("4 elemento", false, true),
+  
+      ];
+    }
+    else {
+      this.todos = [];
+    }
+   
   }
 
 
