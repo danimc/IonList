@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http'
 
+import { ListsPage } from '../pages/lists/lists';
 import { MyApp } from './app.component';
 import { TodosPage } from '../pages/todos/todos';
 import { AddTaskModalPage } from '../pages/add-task-modal/add-task-modal';
@@ -20,6 +21,7 @@ import { DoneTodosPipe } from '../pipes/done-todos/done-todos'
     TodosPage,
     AddTaskModalPage,
     PrioritizedTodosPipe,
+    ListsPage,
     DoneTodosPipe
   ],
   imports: [
@@ -32,6 +34,7 @@ import { DoneTodosPipe } from '../pipes/done-todos/done-todos'
   entryComponents: [
     MyApp,
     TodosPage,
+    ListsPage,
     AddTaskModalPage
     
   ],
