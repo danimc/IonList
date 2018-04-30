@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 import { ListModel } from './list-model';
 
@@ -14,26 +15,39 @@ export class ListServiceProvider {
 
   public lists: ListModel[] = [];
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public local: Storage) {
     this.getLists();
   }
 
   private getLists() {
-    this.lists = [
-      new ListModel("mi lista #1", 0),
-      new ListModel("mi lista #2", 1),
-      new ListModel("mi lista #3", 2),
-      new ListModel("mi lista #4", 3),
-      new ListModel("mi lista #5", 4),
-      new ListModel("mi lista #6", 5),
-      new ListModel("mi lista #7", 6),
-      new ListModel("mi lista #8", 7),
-    ];
+    this.getFromLocal();
   }
 
   public addList(name: string) {
     let list = new ListModel(name, this.lists.length);
     this.lists = [...this.lists, list];
+    return list;
+  }
+
+  public getFromLocal() {
+    this.local.ready().then(()=> {
+      this.local.get('lists').then(
+        data => {
+          let localList: ListModel[] =[];
+          if(data) {
+            for(let list of data){
+              localList.push(new ListModel(list.name, list.id))
+            }
+          }
+          this.lists = localList;
+        })
+    })
+  }
+
+  public saveLocally() {
+    this.local.ready().then(()=> {
+      this.local.set('lists', this.lists)
+    })
   }
 
 }

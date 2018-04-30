@@ -31,7 +31,9 @@ export class ListsPage {
   }
 
   addNewLists(name:string) {
-    this.listsService.addList(name);
+    let list =  this.listsService.addList(name);
+    this.listsService.saveLocally();
+    this.gotoList(list);
   }
 
   showAddList() {
