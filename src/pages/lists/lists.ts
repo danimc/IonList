@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { TodosPage } from '../todos/todos';
 
+import { ListServiceProvider } from '../../shared/list-service';
+
 /**
  * Generated class for the ListsPage page.
  *
@@ -16,7 +18,7 @@ import { TodosPage } from '../todos/todos';
 })
 export class ListsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public listsService: ListServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -25,6 +27,10 @@ export class ListsPage {
 
   gotoList() {
     this.navCtrl.push(TodosPage);
+  }
+
+  addNewLists(name:string) {
+    this.listsService.addList(name);
   }
 
   showAddList() {
@@ -44,7 +50,7 @@ export class ListsPage {
         },
         {
           text: 'Agregar',
-          handler: data => { this.gotoList();}
+          handler: data => { this.addNewLists(data.nombre);}
         }
       ]
     });
