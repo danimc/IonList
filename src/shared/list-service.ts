@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { ListModel } from './list-model';
+import { AppSettings } from './app-settings';
 
 /*
   Generated class for the ListServiceProvider provider.
@@ -49,7 +50,7 @@ export class ListServiceProvider {
   }
 
   private getFromServer() {
-    this.http.get('http://localhost:3000/lists')
+    this.http.get(`${AppSettings.API_ENDPOINT}/lists`)
     .map((lists: Object[]) => {
       return lists.map(item => ListModel.fromJson(item));
     })
