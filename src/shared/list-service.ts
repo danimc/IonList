@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-
+import 'rxjs/add/operator/map';
 import { ListModel } from './list-model';
 
 /*
@@ -20,8 +20,12 @@ export class ListServiceProvider {
   }
 
   private getLists() {
-    this.getFromLocal();
-  }
+    this.getFromLocal().then (() => {
+      this.getFromServer()
+  },
+    () => {this.getFromServer()
+  });
+}
 
   public addList(name: string) {
     let list = new ListModel(name, this.lists.length);
@@ -30,8 +34,8 @@ export class ListServiceProvider {
   }
 
   public getFromLocal() {
-    this.local.ready().then(()=> {
-      this.local.get('lists').then(
+    return this.local.ready().then(()=> {
+    return  this.local.get('lists').then(
         data => {
           let localList: ListModel[] =[];
           if(data) {
@@ -44,10 +48,26 @@ export class ListServiceProvider {
     })
   }
 
+  private getFromServer() {
+    this.http.get('http://localhost:3000/lists')
+    .map((lists: Object[]) => {
+      return lists.map(item => ListModel.fromJson(item));
+    })
+    .subscribe(
+      (result:ListModel[]) => {
+        this.lists = result;
+        this.saveLocally();
+      },
+      error => {
+        console.log("Error cargando la lista desde el servidor", error);
+      }
+    )
+  }
   public saveLocally() {
     this.local.ready().then(()=> {
       this.local.set('lists', this.lists)
     })
+
   }
 
 }

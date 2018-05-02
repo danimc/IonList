@@ -3,4 +3,11 @@ export class ListModel {
         public name: string,
         public id: number
     ){}
+
+    static fromJson(data: any) {
+        if(!data.name || ! data.id)
+           throw(new Error ("Argumento Invalido: el argumento no cumple con la estructura del modelo")); 
+
+        return new ListModel(data.name, data.id);
+    }
 }
