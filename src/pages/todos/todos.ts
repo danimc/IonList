@@ -34,8 +34,11 @@ export class TodosPage {
       this.todoService.loadFromList(this.list.id);
   }
 
-  ionViewDidLoad() {
-      }
+  ionViewDidLoad() {}
+
+  ionViewWillUnload() {
+    this.todoService.saveLocally(this.list.id);
+  }
 
   setTodoStyles(item: TodoModel){
 
