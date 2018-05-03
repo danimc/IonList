@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { TodosPage } from '../todos/todos';
 
 import { ListServiceProvider } from '../../shared/list-service';
@@ -19,7 +19,7 @@ import { ListModel } from '../../shared/list-model';
 })
 export class ListsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public listsService: ListServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public listsService: ListServiceProvider, private loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -31,9 +31,13 @@ export class ListsPage {
   }
 
   addNewLists(name:string) {
-    let list =  this.listsService.addList(name);
-    this.listsService.saveLocally();
-    this.gotoList(list);
+    let loader = this.loadingCtrl.create();
+    loader.present();
+    this.listsService.addList(name)
+    .subscribe(list => {
+      this.gotoList(list);
+      loader.dismiss();
+    }, error => {loader.dismiss();});
   }
 
   showAddList() {
@@ -53,7 +57,11 @@ export class ListsPage {
         },
         {
           text: 'Agregar',
-          handler: data => { this.addNewLists(data.nombre);}
+          handler: data => {
+            let navTransition = addListAlert.dismiss();
+            navTransition.then(()=> {this.addNewLists(data.nombre)}); 
+            return false;
+            }
         }
       ]
     });
