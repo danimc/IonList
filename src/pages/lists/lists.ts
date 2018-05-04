@@ -85,8 +85,8 @@ export class ListsPage {
     }
   }
 
-  removeSelectedLIst() {
-    console.log("Elemento Removido");
+  removeSelectedList() {
+    this.listsService.removeList(this.selectedList);
     this.selectedList = null;
   }
 

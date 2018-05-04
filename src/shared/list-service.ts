@@ -86,6 +86,14 @@ export class ListServiceProvider {
       observable.subscribe(()=>{}, ()=>{}); //no hace nada aun
       return observable
   }
+
+  private deleteListFromServer(id: number) {
+    let observable = this.http.delete(`${AppSettings.API_ENDPOINT}/lists/${id}`)
+    .share();
+
+    return observable;
+
+  }
     
   public saveLocally() {
     this.local.ready().then(()=> {
@@ -93,5 +101,14 @@ export class ListServiceProvider {
     })
 
   }
-
+ public removeList(list: ListModel){
+   this.deleteListFromServer(list.id).subscribe(
+     () => {
+       let index = this.lists.indexOf(list);
+       this.lists = [...this.lists.slice(0,index), ...this.lists.slice(0,index+1)];
+       this.saveLocally();
+     },
+     (error) => {console.log(`ah ocurrido un error tratando de eliminar la lista: ${list.name}`);}
+   )
+ }
 }
