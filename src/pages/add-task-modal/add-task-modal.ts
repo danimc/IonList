@@ -16,7 +16,7 @@ import { TodoModel } from '../../shared/todo-model';
 })
 export class AddTaskModalPage {
 
-  public model = new TodoModel('');
+  public model : TodoModel;
   public title = "Nueva Tarea";
   public buttonText = "Agregar";
 
@@ -26,6 +26,10 @@ export class AddTaskModalPage {
       this.title = "Editar Tarea";
       this.buttonText = "Guardar Cambios"
     }
+    else{
+      let listId = this.navParams.get('listId');
+      this.model = new TodoModel('', listId);
+    }     
   }
 
   ionViewDidLoad() {

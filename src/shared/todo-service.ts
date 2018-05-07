@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 import { TodoModel } from './todo-model';
+import { AppSettings } from '../shared/app-settings';
 
 /*
   Generated class for the TodoServiceProvider provider.
@@ -19,7 +20,7 @@ export class TodoServiceProvider {
   }
 
   public loadFromList(id: number) {
-    this.getFromLocal(id);   
+    this.getFromLocal(id).then
   }
 
   private getFromLocal(id: number) {
@@ -51,7 +52,8 @@ export class TodoServiceProvider {
     
       let isDone = !todo.isDone;
       const todoIndex = this.todos.indexOf(todo);
-      let updateTodo = new TodoModel(todo.description, todo.isImportant, isDone);
+      let updateTodo = TodoModel.clone(todo);
+      updateTodo.isDone = ! todo.isDone;
 
       this.todos = [
         ...this.todos.slice(0, todoIndex),
