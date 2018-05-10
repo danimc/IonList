@@ -12,7 +12,8 @@ export class TodoModel{
     }
 
     static fromJson(data:any) {
-        if(!data.description || ! data.id || data.listId){
+        console.log("datos = ", data);
+        if(!data.description || ! data.id || ! data.listId){
             throw(new Error("Argumento invalido: la estructura del argumento no corresponde con este modelo de datos"));
         }
 

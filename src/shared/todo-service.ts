@@ -20,7 +20,9 @@ export class TodoServiceProvider {
   }
 
   public loadFromList(id: number) {
-    this.getFromLocal(id).then
+    this.getFromLocal(id).then(() => {
+      this.loadFromServer(id);
+    })
   }
 
   private getFromLocal(id: number) {
@@ -33,13 +35,29 @@ export class TodoServiceProvider {
           }
           let localTodos:TodoModel[] = [];
           for(let todo of data) {
-            localTodos.push(new TodoModel(todo.description, todo.isImportant, todo.isDone));
+            localTodos.push(TodoModel.clone(todo));
           }
           this.todos = localTodos;
         }
       )
-
     })
+  }
+
+  private loadFromServer(id: number) {
+    console.log('id:', id);
+    this.http.get(`${AppSettings.API_ENDPOINT}/lists/${id}/todos`)
+    .map((todos:Object[]) => {
+      return todos.map(item => TodoModel.fromJson(item));
+    })
+    .subscribe(
+      (result: TodoModel[]) => {
+        this.todos = result;
+        this.saveLocally(id);
+      },
+      error => {
+        console.log("error cargando la los todos desde el server", error);
+      }
+    )
   }
 
   public saveLocally(id:number) {
@@ -48,9 +66,7 @@ export class TodoServiceProvider {
     })
   }
 
-  toogleTodo(todo: TodoModel){
-    
-      let isDone = !todo.isDone;
+  toogleTodo(todo: TodoModel){    
       const todoIndex = this.todos.indexOf(todo);
       let updateTodo = TodoModel.clone(todo);
       updateTodo.isDone = ! todo.isDone;
